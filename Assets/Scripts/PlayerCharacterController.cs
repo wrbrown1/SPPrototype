@@ -37,7 +37,7 @@ namespace SP.Controller
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Movement>().MoveTo(hit.point);
+                    GetComponent<Movement>().MoveAction(hit.point);
                 }
                 return true;
             }

@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using SP.Core;
 
 namespace SP.Move
 {
-    public class Movement : MonoBehaviour
+    public class Movement : MonoBehaviour, ActionInterface
     {
         private void Update()
         {
@@ -25,6 +25,19 @@ namespace SP.Move
         public void MoveTo(Vector3 destination)
         {
             GetComponent<NavMeshAgent>().destination = destination;
+            GetComponent<NavMeshAgent>().isStopped = false;
         }
+
+        public void MoveAction(Vector3 destination)
+        {
+            GetComponent<ActionAgenda>().Act(this);
+            MoveTo(destination);
+        }
+
+        public void Cancel()
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
+        }
+
     }
 }
